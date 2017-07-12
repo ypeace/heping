@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+	overflow: hidden;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+li:hover{
+	background: lavender;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+
+</body>
+</html>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+   //生成页面省份结构
+   var box=document.getElementById('box');
+   var ul=document.getElementById('ul');
+   var str='';
+   for(var i=0;i<arrCity.length;i++){
+   	 str+='<li>'+arrCity[i].name+'</li>'
+   }
+   ul.innerHTML=str;
+   /*
+    点击上的时候，会一直走向上
+    点击下的时候会一直向下走，走到最后就停止了；
+    拖拽滚轮
+    鼠标点击滚轮会移动到对应的东西上面
+   * */
+  //*********拖拽滚动条*******************
+     var div3=document.getElementById('div3');
+     var div2=document.getElementById('div2');
+     var maxH = box.scrollHeight-box.clientHeight;
+	//1.元素上按下
+	div3.onmousedown = function(ev){
+		ev.preventDefault();
+		var disY = ev.clientY-div3.getBoundingClientRect().top;
+		var max=div2.clientHeight-div3.offsetHeight;
+		var maxH = ul.scrollHeight-box.clientHeight;
+		//2.移动
+		document.onmousemove = function(ev){
+			var t = ev.clientY-disY-div2.getBoundingClientRect().top;
+			if(t<0){t=0}
+			if(t>max){t=max}
+			div3.style.top = t+'px';
+			var bli=t/max;
+			ul.style.top=(-bli*maxH)+'px';
+			//console.log(bli,maxH,-bli*maxH)
+		}
+		//3.抬起
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+		}
+	}
+
+   //***********tool********************
+function addMouseWheel(init){
+				init.ele.onmousewheel = fn
+				init.ele.addEventListener('DOMMouseScroll',fn)
+				function fn(ev){
+					//true:上，false:下
+					var onOff = null;
+					if(ev.wheelDelta){
+						//其他
+						if(ev.wheelDelta>0){
+							onOff = true;
+						}else{
+							onOff = false;
+						}
+					}else{
+						//火狐
+						if(ev.detail<0){
+							onOff = true;
+						}else{
+							onOff = false;
+						}
+					}
+					if(onOff){
+						//上
+						typeof init.fnUp == 'function' && init.fnUp();
+					}else{
+						//下
+						typeof init.fnDown == 'function' && init.fnDown();
+					}
+					
+				}
+			}
+    var father=document.getElementsByClassName('warp')[0];
+	addMouseWheel({
+		ele:father,
+		fnUp:function(){
+			topfn();
+		},
+		fnDown:function(){
+			bottomfn();
+		}
+	})
+	
+	function bilibili(){
+		var xtop=-parseFloat(getComputedStyle(ul).top);
+		var bili=xtop/maxH;
+		console.log(bili);
+		var max=div2.clientHeight-div3.offsetHeight;
+		div3.style.top=max*bili+'px';
+	}
+    var goTop=document.getElementById('top');
+    var goBottom=document.getElementById('bottom');
+    var timer=null;
+    var timer2=null;
+    goTop.onmousedown=function(){
+		timer=setInterval(topfn,30)
+	}
+    goTop.onmouseup=function(){
+		clearInterval(timer)
+	}
+    goBottom.onmousedown=function(){
+		timer2=setInterval(bottomfn,30)
+	}
+    goBottom.onmouseup=function(){
+		clearInterval(timer2)
+	}
+   
+   function topfn(){
+   		var g=parseFloat(getComputedStyle(ul).top)+10;
+		if(g>0){g=0}
+		ul.style.top=g+'px';
+		//console.log(g)
+		//执行一个事件
+		bilibili()
+   }
+   function bottomfn(){
+	var h=parseFloat(getComputedStyle(ul).top)-10;
+	if(h<-maxH){h=-maxH}
+	ul.style.top=h+'px';
+	//console.log(h)
+	bilibili()
+   }
+</script>
