@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>打地鼠</title>
+<style type="text/css">
+	#button1{
+		width:100px;
+		height:100px;
+		background: yellowgreen;
+		font:30px/100px "微软雅黑";
+		border: 1px solid yellowgreen;
+		border-radius: 50%;
+	}
+	#button2{
+		width:100px;
+		height:100px;
+		background: greenyellow;
+		font:30px/100px "微软雅黑";
+		border: 1px solid greenyellow;
+		border-radius: 50%;
+	}
+	#say{
+		position: absolute; 
+		left:0px; 
+		top:360px;
+		width:390px;
+		height:420px;
+		/*background: url(images/logo.png) no-repeat -29px -30px;*/
+	}
+	#logo{
+		position: absolute; 
+		left:30px; 
+		top:0px;
+	}
+
+</style>
+<script language="JavaScript">
+var no1,no2,no3,no4;
+var gameTime,spaceTime,stayTime;
+var button1,button2;
+var time;
+var sum=0;
+var mouse=0;
+var logo=document.getElementById('logo');
+function onGame(){
+	init();
+	no1=window.setInterval("showTime()",1000);	
+	no2=setInterval("showImage()",1000);
+}
+function init(){
+	gameTime=document.getElementById("gameTime");
+	spaceTime=document.getElementById("spaceTime");
+	stayTime=document.getElementById("stayTime");
+	gameTime.disabled=true;
+	spaceTime.disabled=true;
+	stayTime.disabled=true;
+	button1=document.getElementById("button1"); 
+	button2=document.getElementById("button2");
+	button1.disabled=true;
+	button2.disabled=false;
+	time=parseInt(gameTime.value)*60;
+	sum=0;
+	mouse=0;
+}   
+	
+	
+function showTime(){  
+	document.getElementById("time").innerHTML=time;
+	time-=1;
+	if(time<=0){
+		esc();
+		alert('重要事情说三遍-------兄弟，要坚强；兄弟，要坚强；兄弟，要坚强；');
+	}
+	var str="戴上："+mouse+"顶  漏掉："+(sum-mouse)+"顶"+"<br>"+" 总分："+sum*100+"  得分："+(mouse*100-(sum-mouse)*100);
+	document.getElementById("score").innerHTML=str;
+}
+function showImage(){  
+     var images=document.getElementsByName("image");
+     var index=Math.floor(Math.random()*25);
+     images[index].src="images/01.jpg";
+	 sum+=1;
+	 no3=setTimeout("stopImage("+index+")",parseInt(stayTime.value)*1000);
+}    
+function stopImage(index){
+     document.images[index].src="images/00.jpg";
+	
+}     
+function leaveImage(o){
+     
+	 o.src="images/00.jpg";
+	
+}
+function clickMouse(o){
+      var str=o.src.substr(o.src.length-6,6);
+	  if(str=="01.jpg"){
+	   o.src="images/02.jpg";
+	   mouse+=1;
+	   no4=setInterval("leaveImage(o)",500);
+	  }
+}
+function esc(){
+	window.clearInterval(no1);
+	window.clearInterval(no2);
+	window.clearTimeout(no3);
+	window.clearInterval(no4);
+	gameTime.disabled=false;
+	spaceTime.disabled=false;
+	stayTime.disabled=false;
+	button1.disabled=false;
+	var images=document.getElementsByName("image");
+	for(var i=0;i<images.length;i++){
+		images[i].src="images/00.jpg";
+	}
+}
+</script>
+</head>
+
+<body>
+<div id='lvmao'>
+<table align="center" cellspacing="5">
+	<tr style="position: relative;">
+		<td style="position: absolute; left:70px; top:200px;">
+			<table cellspacing="3">
+				<tr >
+					<td style="height:30px; font-size:30px;">游戏时间:</td>
+					<td style="height:30px; font-size:30px;"><input style="width:30px; height:30px; font-size:30px;" type="text" width="2" id="gameTime" value="1"/> 分钟</td>
+				</tr>
+				<tr >
+					<td style="height:30px; font-size:30px;">倒计时间:</td>
+					<td ><div id="time" style="height:30px; font-size:30px;"></div></td>
+				</tr>
+				<tr style="display: none;">
+					<td>--出现间隔:--</td>
+					<td><input type="text" width="6" id="spaceTime" value="1"/> 秒钟</td>
+				</tr>
+				<tr style="display: none;">
+					<td>--停留时间:--</td>
+					<td><input type="text" width="6" id="stayTime" value="1"/> 秒钟</td>
+				</tr>
+				<tr >
+					<td style="height:30px; font-size:30px;">得分情况:</td>
+					<td style="height:30px; font-size:20px;"><div id="score"></div></td>
+				</tr>
+				<tr align="center">
+					<td ><input type="button" value="开始" id="button1" onclick="onGame()"/></td>
+					<br/>
+					<br/>
+					<td><input type="button" value="退出" id="button2" disabled onclick="esc()"/></td>
+					<br/>
+					
+				</tr>
+			</table>
+		</td>
+		<td style="position: absolute; left:600px; top:50px;">
+			<table border="1"  cellspacing="3" bgcolor="white">
+				<tr>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+				</tr>
+				<tr>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+				</tr>
+				<tr>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+				</tr>
+				<tr>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+				</tr>
+				<tr>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+					<td><img src="images/00.jpg" name="image" onclick="clickMouse(this)"/></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<img src="images/logo.png" id="logo"/>
+</div>
+</body>
+</html>
