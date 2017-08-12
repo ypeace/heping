@@ -1,1 +1,33 @@
-文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v文身断发v
+
+html.style.fontSize=hWidth/50
+如果上面除以50  下面想沾满一行，那就用是50rem这样才能占满整个屏幕 
+一个rem代表：15
+
+如果屏幕宽度是750，设置html.style.fontSize=hWidth/30
+那么 需要30rem才能占满整行
+一个rem代表：25
+
+html.style.fontSize=hWidth/50
+如果上面除以50  下面想沾满一行，那就用是50rem这样才能占满整个屏幕 
+一个rem代表：15
+
+如果屏幕宽度是750，设置html.style.fontSize=hWidth/30
+那么 需要30rem才能占满整行
+一个rem代表：25
+
+html.style.fontSize=hWidth/50
+如果上面除以50  下面想沾满一行，那就用是50rem这样才能占满整个屏幕 
+一个rem代表：15
+
+如果屏幕宽度是750，设置html.style.fontSize=hWidth/30
+那么 需要30rem才能占满整行
+一个rem代表：25
+
+html.style.fontSize=hWidth/50
+如果上面除以50  下面想沾满一行，那就用是50rem这样才能占满整个屏幕 
+一个rem代表：15
+
+如果屏幕宽度是750，设置html.style.fontSize=hWidth/30
+那么 需要30rem才能占满整行
+一个rem代表：25
+想  
