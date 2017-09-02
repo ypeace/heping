@@ -1,0 +1,72 @@
+npm install -g create-react-app  //全局安装
+create-react-app app
+cd app
+如果需要安装路由
+yarn add react-router-dom    二选一||    npm install react-router-dom
+
+如果安装rudex  
+npm install react-redux --save
+
+
+如果安装less
+npm run ejecnpm install -g create-react-app  //全局安装
+create-react-app app
+cd app
+如果需要安装路由
+yarn add react-router-dom    二选一||    npm install react-router-dom
+yarn add react-router-dom --save-dev
+如果安装rudex  
+npm install react-redux --save
+
+
+如果安装less
+npm run eject 暴露配置文件
+npm install less-loader less --save-dev
+修改 webpack.config.dev.js 和 webpack.config-prod.js 配置文件
+/\.css$/ 改为 /\.(css|less)$/,, 修改后如下：
+exclude: [
+  /\.html$/,
+  /\.(js|jsx)$/,
+  /\.(css|less)$/,
+  /\.json$/,
+  /\.bmp$/,
+  /\.gif$/,
+  /\.jpe?g$/,
+  /\.png$/,],
+改动2：
+test: /\.css$/ 改为 /\.(css|less)$/
+test: /\.css$/ 的 use 数组配置增加 less-loader
+{ loader: require.resolve('less-loader') // compiles Less to CSS }
+
+安装轮播图插件
+
+
+安装字体图标
+
+
+
+
+npm install less-loader less --save-dev
+修改 webpack.config.dev.js 和 webpack.config-prod.js 配置文件
+/\.css$/ 改为 /\.(css|less)$/,, 修改后如下：
+exclude: [
+  /\.html$/,
+  /\.(js|jsx)$/,
+  /\.(css|less)$/,
+  /\.json$/,
+  /\.bmp$/,
+  /\.gif$/,
+  /\.jpe?g$/,
+  /\.png$/,],
+改动2：
+test: /\.css$/ 改为 /\.(css|less)$/
+test: /\.css$/ 的 use 数组配置增加 less-loader
+{ loader: require.resolve('less-loader') // compiles Less to CSS }
+
+安装轮播图插件
+
+
+安装字体图标
+
+
+
