@@ -1,0 +1,6 @@
+如果木偶组件只需要传递入数据即可渲染，不需要额外的this.state
+按需加载涉及的东西：huge-apps  它将react-router和require.ensure结合起来
+redux-thunk
+npm i -D presets-state-2
+
+组件划分 要是一个页面专用的 在下面建一个components
